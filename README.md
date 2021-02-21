@@ -27,3 +27,32 @@ sudo setcap cap_sys_admin+ep ./build/rel/drmsend
 sudo chown root ./build/rel/drmsend
 ./build/rel/drmsend 0x49 drmsend.sock &
 ```
+
+### Get patched OBS
+```
+git clone https://github.com/w23/obs-studio.git
+cd obs-studio
+git checkout linux-libdrm-grab
+```
+
+### Build patched OBS
+```
+mkdir build
+cd build
+cmake .. -DUNIX_STRUCTURE=0 -DUSE_EGL=1 -GNinja
+ninja
+```
+
+### Run it.
+```
+cd rundir/RelWithDebInfo/bin/64bit/
+./obs -p
+```
+
+### Now you can add "DMA-BUF source" to your scene as you would with any other regular source.
+In configuration dialog you need to specify drmsend socket:
+
+    Click "Browse" and navigate to the directory with drmsend.sock, e.g. where you checked out drmtoy and ran build/rel/drmsend
+    QFileDialog will be unhelpful enough to not show UNIX sockets, so you'd need to type your filename manually, e.g. drmsend.sock and press enter.
+    Now you should have a preview of your framebuffer screen. Note that there's no cursor capture yet.
+    VYGODA
