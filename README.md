@@ -15,7 +15,7 @@ count_fbs = 1
 		width=320 height=480 pitch=640 bpp=16 depth=16 handle=0
 ```
 
-### Run drmsend with elevated privileges. Replace 0x56 with your framebuffer id
+### Run drmsend with elevated privileges. Replace 0x49 with your framebuffer id
 `sudo ./build/rel/drmsend 0x49 drmsend.sock &`
 
 ### chown socket so that your user can access it
